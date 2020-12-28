@@ -2,84 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+
+use App\Models\ProductCategory;
+use App\Http\Requests\StoreProductCategory;
+use App\Http\Requests\UpdateProductCategory;
+
+use DB;
 
 class ProductCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $datas = ProductCategory::orderBy('id', 'asc')->get();
+        return view('product-category.index', compact('datas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('product-category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreProductCategory $request)
+    {
+        DB::beginTransaction();
+        try{
+            $input = $request->only([
+                'name',
+            ]);
+            
+            $data = ProductCategory::create($input);
+            if($data){
+                DB::commit();
+                return redirect()->route('product-categories.index')->with(['success' => 'Data berhasil ditambahkan!']);
+            }
+
+            return redirect()->back()->with(['error' => 'Data gagal ditambahkan!']);
+        } catch (\Exception $e){
+            DB::rollback();
+
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProductCategory $productCategory)
+    public function edit($id)
     {
-        //
+        $data = ProductCategory::findOrFail($id);
+
+        return view('product-category.edit', compact('data', 'id'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ProductCategory $productCategory)
+    public function update(UpdateProductCategory $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $input = $request->only([
+                'name',
+            ]);
+            
+            $data = ProductCategory::findOrFail($id);
+            if($data->update($input)){
+                DB::commit();
+                return redirect()->route('product-categories.index')->with(['success' => 'Data berhasil diubah!']);
+            }
+
+            return redirect()->back()->with(['error' => 'Data gagal diubah!']);
+        } catch (\Exception $e){
+            DB::rollback();
+
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ProductCategory $productCategory)
+    public function destroy($id)
     {
-        //
-    }
+        $data = ProductCategory::findOrFail($id);
+        if($data->delete()){
+            return redirect()->back()->with(['success' => 'Data berhasil dihapus!']);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProductCategory $productCategory)
-    {
-        //
+        return redirect()->back()->with(['error' => 'Data gagal diubah!']);
     }
 }

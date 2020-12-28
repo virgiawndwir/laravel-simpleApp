@@ -252,6 +252,16 @@ return [
             'url'  => 'products',
             'icon' => 'fas fa-fw fa-archive',
         ],
+        [
+            'text' => 'Product Categories',
+            'url'  => 'product-categories',
+            'icon' => 'fas fa-fw fa-boxes',
+        ],
+        [
+            'text' => 'Transaksi',
+            'url'  => 'transaction',
+            'icon' => 'fas fa-fw fa-money-check',
+        ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',

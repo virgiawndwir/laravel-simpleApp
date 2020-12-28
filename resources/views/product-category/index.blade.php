@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Products')
+@section('title', 'Product Categories')
 
 @section('content_header')
-  <h1>Products</h1>
+  <h1>Product Categories</h1>
   @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
       <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -14,17 +14,13 @@
 
 @section('content')
 <div class="float-right">
-  <a href="{{ route('products.create') }}" class="btn btn-info btn-sm"><i class="fas fa-plus"></i></a>
+  <a href="{{ route('product-categories.create') }}" class="btn btn-info btn-sm"><i class="fas fa-plus"></i></a>
 </div>
   <table id="example" class="table bg-white mt-5">
     <thead class="bg-light">
       <tr>
         <th scope="col">No</th>
-        <th scope="col">Nama Barang</th>
-        <th scope="col">Jenis</th>
-        <th scope="col">Harga</th>
-        <th scope="col">Kondisi Barang</th>
-        <th scope="col">Jumlah Barang</th>
+        <th scope="col">Jenis Barang</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -36,17 +32,13 @@
       <tr>
         <td>{{ $i++ }}</td>
         <td>{{ $data->name }}</td>
-        <td>{{ $data->productCategory->name }}</td>
-        <td>Rp. {{ number_format($data->price) }}</td>
-        <td>{{ $data->quantity }}</td>
-        <td>{{ $data->qty }}</td>
         <td>
           <div class="row">
             <div class="col-sm-2">
-              <a class="btn btn-sm btn-link" href="{{ route('products.edit', $data->id) }}"><i class="fas fa-fw fa-edit"></i></a>
+              <a class="btn btn-sm btn-link" href="{{ route('product-categories.edit', $data->id) }}"><i class="fas fa-fw fa-edit"></i></a>
             </div>
             <div class="col-sm-2">
-              <form action="{{ route('products.destroy', $data->id) }}" method="post" class="form-inline">
+              <form action="{{ route('product-categories.destroy', $data->id) }}" method="post" class="form-inline">
                 @method('DELETE')
                 @csrf
                 <button class="btn btn-link btn-sm delete-from-table"><i class="fas fa-fw fa-trash"></i></button>

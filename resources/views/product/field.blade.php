@@ -8,9 +8,9 @@
   </div>
 
   <div class="col-md-6 mb-3">
-    <label for="type" class="form-label">Jenis</label>
-    <input type="text" name="product_category_id" class="form-control @error('product_category_id') is-invalid @enderror" placeholder="Jenis barang" id="type" value="{{ @$data->product_category_id ? $data->product_category_id : old('product_category_id') }}">
-    @error('product_category_id')
+    <label for="qty" class="form-label">Jumlah</label>
+    <input type="text" name="qty" class="form-control @error('qty') is-invalid @enderror" placeholder="Jumlah barang" id="qty" value="{{ @$data->qty ? $data->qty : old('qty') }}">
+    @error('qty')
       <span class="text-danger">{{ $message }}</span>
     @enderror
   </div>
@@ -35,10 +35,14 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6 mb-3">
-    <label for="qty" class="form-label">Jumlah</label>
-    <input type="text" name="qty" class="form-control @error('qty') is-invalid @enderror" placeholder="Jumlah barang" id="qty" value="{{ @$data->qty ? $data->qty : old('qty') }}">
-    @error('qty')
+  <div class="col-md-12 mb-3">
+    <label for="type" class="form-label">Jenis</label><br>
+    <select class="select2 form-control" name="product_category_id">
+      @foreach ($prods as $data)
+        <option value="{{ $data->id }}">{{ $data->name }}</option>
+      @endforeach
+    </select>
+    @error('product_category_id')
       <span class="text-danger">{{ $message }}</span>
     @enderror
   </div>

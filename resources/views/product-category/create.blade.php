@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Product')
+@section('title', 'Create Product Category')
 
 @section('content_header')
-  <h1>Create Product</h1>
+  <h1>Create Product Category</h1>
   @if ($message = Session::get('error'))
     <div class="alert alert-danger alert-block">
       <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -14,11 +14,11 @@
 
 @section('content')
   <div class="card col-md-6">
-    <form action="{{ route('products.store') }}" method="post">
+    <form action="{{ route('product-categories.store') }}" method="post">
       @method('POST')
       @csrf
         <div class="card-body">
-          @include('product.field')
+          @include('product-category.field')
         </div>
       
       <div class="text-right mb-3 mr-2">
@@ -26,12 +26,4 @@
       </div>
     </form>
   </div>
-@stop
-
-@section('js')
-<script>
-  $(document).ready(function() {
-    $('.select2').select2();
-  });
-</script>
 @stop

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,3 +15,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::resource('products', ProductController::class);
+Route::resource('product-categories', ProductCategoryController::class);
