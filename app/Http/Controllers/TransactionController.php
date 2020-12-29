@@ -47,34 +47,4 @@ class TransactionController extends Controller
 
         return view('transaction.total', compact('total', 'price', 'userQty', 'change', 'userMoney'));
     }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Transaction $transaction)
-    {
-        //
-    }
-
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
-
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
-
-    public function destroy(Transaction $transaction)
-    {
-        //
-    }
 }
