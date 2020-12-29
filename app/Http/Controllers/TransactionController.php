@@ -2,82 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
 use Illuminate\Http\Request;
+
+use App\Models\Transaction;
+use App\Models\Product;
+
+use DB;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        $products = Product::all();
+        return view('transaction.index', compact('products'));
+    }
+
+    public function cart($id)
+    {
+        $product = Product::find($id);
+        return view('transaction.cart', compact('product'));
+    }
+
+    public function countPrice(Request $request, $id)
+    {
+        $price = Product::whereId($id)->pluck('price')->first();
+        $qty = Product::whereId($id)->pluck('qty')->first();
+        $userMoney = $request->userMoney;
+        $userQty = $request->userQty;
+        $newQty = ($qty - $userQty);
+        // dd($newQty);
+
+        $total = $request->userTotal;
+        $total = ($price * $userQty);
+        $change = ($userMoney - $total);
+
+        $data = Product::whereQty($qty)->update(['qty' => $newQty]);
+        DB::commit();
+
+        return view('transaction.total', compact('total', 'price', 'userQty', 'change', 'userMoney'));
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
     public function show(Transaction $transaction)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Transaction $transaction)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Transaction $transaction)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Transaction $transaction)
     {
         //

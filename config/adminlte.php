@@ -257,8 +257,9 @@ return [
             'url'  => 'product-categories',
             'icon' => 'fas fa-fw fa-boxes',
         ],
+        ['header' => 'Transaction Menu'],
         [
-            'text' => 'Transaksi',
+            'text' => 'Transaction',
             'url'  => 'transaction',
             'icon' => 'fas fa-fw fa-money-check',
         ],
