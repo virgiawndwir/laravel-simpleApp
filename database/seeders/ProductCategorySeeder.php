@@ -15,11 +15,7 @@ class ProductCategorySeeder extends Seeder
     public function run()
     {
         ProductCategory::insert([
-            'name' => 'Barang 1',
-            'product_category_id' => '1',
-            'price' => '20000',
-            'quantity' => 'good',
-            'qty' => '20'
+            'name' => 'Barang Keras',
         ]);
     }
 }

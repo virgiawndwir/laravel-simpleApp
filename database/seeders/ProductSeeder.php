@@ -14,12 +14,12 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-       Product::insert([
-            'name' => 'Barang 1',
-            'product_category_id' => '1',
-            'price' => '20000',
-            'quantity' => 'good',
-            'qty' => '20'
-        ]);
+    //    Product::insert([
+    //         'name' => 'Barang 1',
+    //         'product_category_id' => '1',
+    //         'price' => '20000',
+    //         'quantity' => 'good',
+    //         'qty' => '20'
+    //     ]);
     }
 }
