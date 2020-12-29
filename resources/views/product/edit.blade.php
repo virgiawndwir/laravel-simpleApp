@@ -14,7 +14,7 @@
 
 @section('content')
   <div class="card col-md-6">
-    <form action="{{ route('products.update', $id) }}" method="post">
+    <form action="{{ route('products.update', $id) }}" method="post" enctype="multipart/form-data">
       @method('PUT')
       @csrf
         <div class="card-body">

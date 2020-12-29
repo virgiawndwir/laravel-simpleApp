@@ -9,10 +9,13 @@ use App\Models\ProductCategory;
 use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UpdateProduct;
 
+use App\Helpers\UploadImg;
 use DB;
 
 class ProductController extends Controller
 {
+    protected $path = 'public/product';
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,12 +41,22 @@ class ProductController extends Controller
                 'name',
                 'product_category_id',
                 'price',
+                'image',
                 'quantity',
                 'qty',
             ]);
             
+            $img = $request->file('image');
+            if(!is_null($img)){
+                $upload = new UploadImg($img);
+                $upload->setPath($this->path);
+                $input['image'] = $upload->getFilename();
+            }
+
             $data = Product::create($input);
             if($data){
+                if(!is_null($img)) $upload->upload();
+
                 DB::commit();
                 return redirect()->route('products.index')->with(['success' => 'Data berhasil ditambahkan!']);
             }
@@ -77,12 +90,22 @@ class ProductController extends Controller
                 'name',
                 'product_category_id',
                 'price',
+                'image',
                 'quantity',
                 'qty',
             ]);
             
+            $img = $request->file('image');
+            if(!is_null($img)){
+                $upload = new UploadImg($img);
+                $upload->setPath($this->path);
+                $input['image'] = $upload->getFilename();
+            }
+
             $data = Product::findOrFail($id);
             if($data->update($input)){
+                if(!is_null($img)) $upload->upload();
+
                 DB::commit();
                 return redirect()->route('products.index')->with(['success' => 'Data berhasil diubah!']);
             }

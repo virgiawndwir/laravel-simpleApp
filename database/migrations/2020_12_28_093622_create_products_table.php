@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->foreignId('product_category_id')->constrained()->onDelete('cascade');
             $table->string('price');
+            $table->text('image')->nullable();
             $table->string('quantity');
             $table->string('qty');
             $table->timestamp('created_at')->useCurrent();

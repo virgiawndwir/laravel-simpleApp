@@ -26,6 +26,7 @@ class StoreProduct extends FormRequest
         return [
             'name' => 'required',
             'product_category_id' => 'required',
+            'image' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required',
             'qty' => 'required|numeric',
@@ -36,6 +37,7 @@ class StoreProduct extends FormRequest
     {
         return [
             'name.required'         => 'Nama harus diisi',
+            'image.required'    => 'Gambar harus diisi',
             'product_category_id.required'  => 'Jenis harus diisi',
             'price.required'    => 'Harga harus diisi',
             'price.numeric' => 'Harus diisi angka',

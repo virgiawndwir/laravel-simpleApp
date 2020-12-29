@@ -25,6 +25,7 @@
         <th scope="col">Harga</th>
         <th scope="col">Kondisi Barang</th>
         <th scope="col">Jumlah Barang</th>
+        <th scope="col">Gambar</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -40,6 +41,9 @@
         <td>Rp. {{ number_format($data->price) }}</td>
         <td>{{ $data->quantity }}</td>
         <td>{{ $data->qty }}</td>
+        <td>
+          <img class="img img-thumbnail" src="{{ url(url($data->img_url())) }}" width="100px" height="100px">
+        </td>
         <td>
           <div class="row">
             <div class="col-sm-2">

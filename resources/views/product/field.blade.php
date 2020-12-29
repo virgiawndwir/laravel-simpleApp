@@ -35,14 +35,23 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12 mb-3">
+  <div class="col-md-6 mb-3">
     <label for="type" class="form-label">Jenis</label><br>
     <select class="select2 form-control" name="product_category_id">
+      <option value="" disabled selected>-- Pilih Jenis Barang --</option>
       @foreach ($prods as $data)
         <option value="{{ $data->id }}">{{ $data->name }}</option>
       @endforeach
     </select>
     @error('product_category_id')
+      <span class="text-danger">{{ $message }}</span>
+    @enderror
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <label for="image" class="form-label">Gambar</label>
+    <input class="form-control @error('image') is-invalid @enderror" type="file" accept="image/*" name="image" id="image">
+    @error('image')
       <span class="text-danger">{{ $message }}</span>
     @enderror
   </div>
