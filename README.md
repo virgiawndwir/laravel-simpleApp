@@ -1,13 +1,13 @@
 # Simple App
 
 ## Keterangan Base Project 
-- Untuk dokumentasi php nya bisa pake [Dokumentasi laravel](https://laravel.com/docs) 
+- Untuk dokumentasi Laravel nya bisa lihat di [Dokumentasi laravel](https://laravel.com/docs) 
 
 ## Cara instalasi
 - Pastikan webserver tersedia (apache, nginx, dll)
 - PHP dan Composer sudah terinstall
 - Clone projek 
-- Jalan kan `composer install`
+- Jalankan `composer install`
 - Buat database dengan nama apa saja, sesuai project
 - Buat file `.env`, isi nya copas dari file `.env.example`
 - konfigurasi database :
